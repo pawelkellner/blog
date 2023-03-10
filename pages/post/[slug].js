@@ -90,7 +90,6 @@ const PostPage = ({post}) =>{
                     </section>
                 </section>
             </div>
-            <CommentsForm />
         </Layout>
     )
 }

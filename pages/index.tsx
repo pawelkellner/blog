@@ -5,8 +5,7 @@ import Image from 'next/image'
 import {StageCard, PostCard, Nav, PostWidget} from '../components/index'
 import {getStageCategories} from '../services/index'
 
-const Home: NextPage = ({ stages }) => {
-  console.log(stages)
+const Home: NextPage = ( props ) => {
   return (
       <Layout>
     <div className="container mx-auto px-10 mb-8 h-full">
@@ -15,7 +14,7 @@ const Home: NextPage = ({ stages }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className='flex align-center items-center justify-center gap-60 h-3/4'>
-          {stages.map((stage, index) => (
+          {props.stages.map((stage, index) => (
             <StageCard key={index} stage={stage.node} />
           ))}
       </div>

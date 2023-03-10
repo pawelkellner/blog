@@ -1,11 +1,10 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Layout from '../components/Layout/Layout'
 import Image from 'next/image'
 import {StageCard, PostCard, Nav, PostWidget} from '../components/index'
 import {getStageCategories} from '../services/index'
 
-const Home: NextPage = ( props ) => {
+export default function Home( props ){
   return (
       <Layout>
     <div className="container mx-auto px-10 mb-8 h-full">
@@ -29,5 +28,3 @@ export async function getStaticProps(){
     props: {stages}
   }
 }
-
-export default Home

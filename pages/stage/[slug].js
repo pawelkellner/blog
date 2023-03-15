@@ -27,17 +27,17 @@ const StagePage = ({posts, params}) => {
   )
 }
 
-export async function getStaticPaths(){
-    const data = await getStageCategories() || []
-    return{
-        paths: data.map((stage) => ({
-            params: { slug: stage.node.slug}
-        })),
-        fallback: true
-    }
-}
+// export async function getStaticPaths(){
+//     const data = await getStageCategories() || []
+//     return{
+//         paths: data.map((stage) => ({
+//             params: { slug: stage.node.slug}
+//         })),
+//         fallback: true
+//     }
+// }
 
-export async function getStaticProps({params}){
+export async function getServerSideProps({params}){
     const data = await getFilteredPosts(params.slug) || []
     return {
       props: {posts: data, params: params}

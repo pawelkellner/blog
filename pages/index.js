@@ -22,7 +22,7 @@ export default function Home( props ){
   )
 }
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const stages = await getStageCategories() || []
   return {
     props: {stages}

@@ -108,17 +108,17 @@ const PostPage = ({post}) =>{
     )
 }
 
-export async function getStaticPaths(){
-    const data = await getAllPosts() || []
-    return{
-        paths: data.map((stage) => ({
-            params: { slug: stage.node.slug}
-        })),
-        fallback: true
-    }
-}
+// export async function getStaticPaths(){
+//     const data = await getAllPosts() || []
+//     return{
+//         paths: data.map((stage) => ({
+//             params: { slug: stage.node.slug}
+//         })),
+//         fallback: true
+//     }
+// }
 
-export async function getStaticProps({params}){
+export async function getServerSideProps({params}){
     const data = await getPosts(params.slug) || []
     return {
       props: {post: data, params: params}

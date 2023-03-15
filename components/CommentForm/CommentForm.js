@@ -8,10 +8,10 @@ const CommentsForm = ({ben, slug}) =>{
     const [text, setText] = useState('')
 
     const changeNameValue = (e) =>{
-        setName(e.value)
+        setName(e.target.value)
     }
     const changeTextValue = (e) =>{
-        setText(e.value)
+        setText(e.target.value)
     }
     
     const handleCommentSubmission = (e) =>{

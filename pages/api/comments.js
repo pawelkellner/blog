@@ -5,20 +5,30 @@ const graphqlApi = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 const graphcmsToken = process.env.GRAPHCMS_TOKEN
 
 export default async function comments(req,res){
-  const {name,email,slug,comment} = req.body
-  const graphQLClient = new GraphQLClient(graphqlApi, {
-    headers:{
-      authorization: `Bearer ${graphcmsToken}`
-    }
-  })
 
-  const query = gql`
-    mutation CreateComment($name: String!, $email: String!, $comment: String!, $slug: String!){
-      createComment(data: {name: $name, email: $email, comment: $comment, post: {connect: {slug: $slug}}}) {id}
-    }
-  `
+  if(req.method !== 'POST'){
+    console.log('req')
+    res.status(405).send({message: req.body})
+    return
+  }
 
-  const result = await graphQLClient.request(query, req.body)
+    console.error(GraphQLClient, gql,res);
+    const graphQLClient = new GraphQLClient(graphqlApi, {
+      headers:{
+        authorization: `Bearer ${graphcmsToken}`,
+      },
+    })
+  
+    const query = gql`
+      mutation CreateComment($name: String!, $comment: String!, $slug: String!){
+        createComment(data: {name: $name, comment: $comment, post: { connect: { slug: $slug}}}) {id}
+      }
+    `
 
-  return res.status(200).send(result);
+    const commentContent = {"name": `${req.body.name}`, "comment": `${req.body.text}`, "slug": `${req.body.slug}`}
+
+  
+    const result = await graphQLClient.request(query, commentContent)
+  
+    return res.status(200).send(result);
 }

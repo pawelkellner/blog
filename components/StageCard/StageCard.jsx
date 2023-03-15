@@ -3,7 +3,6 @@ import { getStageCategories } from '../../services'
 import Link from 'next/link'
 
 const StageCard = ({stage}) => {
-  console.log(stage)
   return (
 
     <article className='group relative bg-yellow-600 w-2/5 h-96 rounded-xl overflow-hidden'>

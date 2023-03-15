@@ -11,8 +11,6 @@ const Nav = ({ categories }) => {
             .then(result => setStageCategories(result))
     }, [])
 
-    console.log(stageCategories)
-
     // getStageCategories()
     //     .then(result => setStageCategories(result));
   return (

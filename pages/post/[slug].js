@@ -3,11 +3,10 @@ import {getAllPosts, getFilteredPosts, getPosts, getStageCategories} from '../..
 import Layout from '../../components/Layout/Layout'
 import Head from 'next/head'
 import moment from 'moment'
-import { CommentsForm} from '../../components/index'
+import { CommentForm} from '../../components/index'
 import { useRouter } from 'next/router'
 
 const PostPage = ({post}) =>{
-    console.log(post)
     const router = useRouter();
 
     if(router.isFallback){
@@ -59,8 +58,8 @@ const PostPage = ({post}) =>{
             <title>{post.title}</title>
             <link rel="icon" href="../favicon.ico" />
             </Head>
-            <div className='container mx-auto flex justify-center'>
-                <section className='bg-white w-9/12 rounded-xl h-full'>
+            <div className='container mx-auto flex flex-col justify-center items-center mb-10 gap-8'>
+                <section className='bg-white md:w-9/12 rounded-xl h-full sm:w-full'>
                     <figure className='w-full h-1/5'>
                         <img src={post.featureImage.url} alt={post.title} className='h-full w-full object-cover object-center rounded-t-xl' />
                     </figure>
@@ -89,7 +88,22 @@ const PostPage = ({post}) =>{
                         })}
                     </section>
                 </section>
+                <CommentForm slug={post.slug}/>
+                <section className='bg-white md:w-9/12 sm:w-full rounded-xl p-4 flex flex-col gap-4'>
+                <h3 className="font-semibold text-xl">Berichten</h3>
+                  <hr />
+                  {post?.comments.length ? post.comments?.map((comment, index) =>(
+                    <article key={index} className='border-solid bg-gray-100 rounded-xl p-4'>
+                      <h1 className='text-xl'>
+                        {comment.name}
+                      </h1>
+                      <p>{comment.comment}</p>
+                    </article>
+                  )) : <h1>Nog geen berichten geplaatst!</h1>}
+                </section>
             </div>
+            
+            
         </Layout>
     )
 }

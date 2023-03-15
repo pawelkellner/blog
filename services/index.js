@@ -29,6 +29,10 @@ export const getPosts = async (slug) =>{
         title
         slug
       }
+      comments {
+        name
+        comment
+      }
     }
   }
   `
@@ -171,13 +175,20 @@ export const getStageCategories = async () =>{
   return result.categoriesConnection.edges;
 }
 
+export const subComment = async (obj) => {
+  const result = await fetch('/api/comments')
+  return result.json();
+}
+
 export const submitComment = async (obj) => {
   const result = await fetch('/api/comments', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json'
     },
     body: JSON.stringify(obj),
   })
-  return result.json();
+  console.log(await result.json());
+  return result;
 }

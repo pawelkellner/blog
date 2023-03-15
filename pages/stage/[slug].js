@@ -6,7 +6,6 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 const StagePage = ({posts, params}) => {
-  console.log(posts)
 
   const router = useRouter();
 
@@ -20,9 +19,9 @@ const StagePage = ({posts, params}) => {
         <link rel="icon" href="../favicon.ico" />
         </Head>
         <div className='relative container flex mx-auto px-10 flex-col items-center '>
-            {posts.map((post) => (
-                <PostCard post={post.node} />
-            ))}
+            {posts?.length ? posts.map((post, index) => (
+                <PostCard key={index} post={post.node} />
+            )) : <h1 className='text-white text-xl'>Er zijn nog geen blogs beschikbaar!</h1> }
         </div>
     </Layout>
   )
